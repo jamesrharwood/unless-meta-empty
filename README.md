@@ -21,7 +21,7 @@ title: Example
 subtitle: My subtitle
 ---
 
-::: {.unless-meta-empty key="subtitle"}
+::: {unless-meta-empty=true key="subtitle"}
 ## Subtitle block
 
 This appears because `subtitle` exists and is not blank.
