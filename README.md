@@ -28,11 +28,24 @@ format:
 ---
 title: Example
 subtitle: My subtitle
+empty-field: 
 ---
 
-::: {unless-meta-empty=true key="subtitle"}
+::: {unless-meta-empty="subtitle"}
 ## Subtitle block
 
 This appears because `subtitle` exists and is not blank.
+:::
+
+::: {unless-meta-empty="empty-field"}
+## Empty Field block
+
+This does not appear because `empty-field` exists but is blank.
+:::
+
+::: {unless-meta-empty="missing-field"}
+## Empty Field block
+
+This does not appear because `missing-field` does not exist in metadata.
 :::
 ```

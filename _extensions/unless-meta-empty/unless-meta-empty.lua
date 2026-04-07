@@ -31,23 +31,19 @@ local function meta_has_value(path)
 end
 
 local function process_div(el)
-  local has_control_attribute = el.attributes["unless-meta-empty"] ~= nil
-  local has_control_class = el.classes:includes("unless-meta-empty")
-
-  if not has_control_attribute and not has_control_class then
+  local path = el.attributes["unless-meta-empty"]
+  if path == nil then
     return nil
   end
 
-  local key = el.attributes["key"]
-  if key == nil or trim(key) == "" then
+  path = trim(path)
+  if path == "" then
     return pandoc.Null()
   end
 
-  if meta_has_value(key) then
+  if meta_has_value(path) then
     -- Remove control attributes before emitting output.
     el.attributes["unless-meta-empty"] = nil
-    el.classes = el.classes:filter(function(c) return c ~= "unless-meta-empty" end)
-    el.attributes["key"] = nil
     return el
   else
     return pandoc.Null()
